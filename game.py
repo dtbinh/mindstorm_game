@@ -1,5 +1,5 @@
 import flask
 
-print "Hello World!"
+print("Hello World!")
 
 # when the test commit is just right
