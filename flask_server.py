@@ -4,6 +4,8 @@ to make, it will be run using flask and Jinja (i think)
 
 TODO:
 
+Use http POST to transfer id and commands?
+
 Template:
 HTML
 CSS
@@ -11,7 +13,7 @@ Other stuff
 
 Flask:
 Fix buttons
-Uniqe IDs for everyone
+Unique IDs for everyone
 
 Other:
 Team set up
@@ -23,8 +25,8 @@ from flask import render_template
 from random import randint
 
 def team():
-    teams = {1:'blue', 2:'red', 3:'green', 4:'yellow'}
-    n = randint(1,4)
+    teams = ['blue', 'red', 'green', 'yellow']
+    n = randint(0,3)
     return(teams[n])
 
 app = Flask(__name__)
