@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mindstorm game</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet.css') }}"/>
+</head>
+<body>
+  <div class="info">
+    <p>You are on team {{ team }}</p>
+  </div>
+  <div class="buttons">
+    <div class="forward">
+      <button class="forward" onclick="alert('Forward!')">Forward</button>
+    </div>
+    <div class="left">
+      <button class="left" onclick="alert('Left!')">Left</button>
+    </div>
+    <div class="right">
+      <button class="right" onclick="alert('Right!')">Right</button>
+    </div><br></br>
+    <div class="backward">
+      <button class="backward" onclick="alert('Backward!')">Backward</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+.info {
+  text-align: center;
+}
+
+.forward {
+  border-style: hidden;
+  border-width: medium;
+  width: 60%;
+  height: 200px;
+  margin: auto;
+  padding: 6px;
+  text-align: center;
+}
+
+.left {
+  border-style: hidden;
+  border-width: medium;
+  position: absolute;
+  left: 0px;
+  width: 60%;
+  height: 200px;
+  padding: 6px;
+  margin: auto;
+}
+
+.right {
+  border-style: hidden;
+  border-width: medium;
+  position: absolute;
+  right: 0px;
+  width: 60%;
+  height: 200px;
+  padding: 6px;
+  margin: auto;
+}
+
+.backward {
+  border-style: hidden;
+  border-width: medium;
+  width: 60%;
+  height: 200px;
+  padding: 6px;
+  margin: 90px auto auto;
+  text-align: center;
+}
