@@ -9,7 +9,7 @@ colorSensor = ev3.ColorSensor('in1')
 
 #define a function that makes it possible for the robot to announce the winner
 def winSpeak(winner):
-    ev3.Sound.speak(winner, 'team wins').wait()
+    ev3.Sound.speak(winner + 'team wins').wait()
 
 #if the color the sensor detects is either blue, green, yellow or red
 #the respective team wins
