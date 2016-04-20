@@ -10,16 +10,24 @@
   </div>
   <div class="buttons">
     <div class="forward">
-      <button class="forward" onclick="alert('Forward!')">Forward</button>
+      <form action="?forward" method="post" name="forward">
+        <input type="submit" name="submit" value="forward" class="forward"/>
+      </form>
     </div>
     <div class="left">
-      <button class="left" onclick="alert('Left!')">Left</button>
+      <form action="?left" method="post" name="left">
+        <input type="submit" name="submit" value="left" class="left">
+      </form>
     </div>
     <div class="right">
-      <button class="right" onclick="alert('Right!')">Right</button>
+      <form action="?right" method="post" name="right">
+        <input type="submit" name="submit" value="right" class="right">
+      </form>
     </div><br></br>
     <div class="backward">
-      <button class="backward" onclick="alert('Backward!')">Backward</button>
+      <form action="?backward" method="post" name="backward">
+        <input type="submit" name="submit" value="backward" class="backward">
+      </form>
     </div>
   </div>
 </body>
