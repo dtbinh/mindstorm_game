@@ -20,6 +20,9 @@ Maybe some kind of controll gui like qt or tkinter for host?
 from flask import Flask
 from flask import render_template, request, url_for
 from random import randint
+# This is a local file (game.py) and will probely change name in the near
+# future
+import game
 
 def team():
     # Replace this function with something that is more permenant
@@ -34,16 +37,20 @@ def index():
     if request.method == 'POST':
         # Add functions before returning to run commands
         if request.form['submit'] == 'forward':
-            return render_template('index.html',team=team())
+            motor('forward')
+            return render_template('index.html',team=team(), direction='forward')
         elif request.form['submit'] == 'left':
-            return render_template('index.html',team=team())
+            motor('left')
+            return render_template('index.html',team=team(), direction='left')
         elif request.form['submit'] == 'right':
-            return render_template('index.html',team=team())
+            motor('right')
+            return render_template('index.html',team=team(), direction='right')
         elif request.form['submit'] == 'backward':
-            return render_template('index.html',team=team())
+            motor('backward')
+            return render_template('index.html',team=team(), direction='backward')
         else:
-            return render_template('index.html',team=team())
+            return render_template('index.html',team=team(), direction='none')
     else:
-        return render_template('index.html',team=team())
+        return render_template('index.html',team=team(), direction='none')
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
