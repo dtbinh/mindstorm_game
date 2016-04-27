@@ -31,15 +31,15 @@ def colorCheck(sensor):
 def motor(direction):
     if direction == 'right':
         motorA.run_timed(time_sp=2000, duty_cycle_sp=50)
-        colorCheck(colorSensor.color())
+        # colorCheck(colorSensor.color())
     elif direction == 'left':
         motorB.run_timed(time_sp=2000, duty_cycle_sp=50)
-        colorCheck(colorSensor.color())
+        # colorCheck(colorSensor.color())
     elif direction == 'forward':
         motorA.run_timed(time_sp=2000, duty_cycle_sp=50)
         motorB.run_timed(time_sp=2000, duty_cycle_sp=50)
-        colorCheck(colorSensor.color())
+        # colorCheck(colorSensor.color())
     elif direction == 'backward':
         motorA.run_timed(time_sp=2000, duty_cycle_sp=-50) #check negative if this doesn't work
         motorB.run_timed(time_sp=2000, duty_cycle_sp=-50)
-        colorCheck(colorSensor.color())
+        # colorCheck(colorSensor.color())
