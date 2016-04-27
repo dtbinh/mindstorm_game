@@ -37,16 +37,16 @@ def index():
     if request.method == 'POST':
         # Add functions before returning to run commands
         if request.form['submit'] == 'forward':
-            motor('forward')
+            game.motor('forward')
             return render_template('index.html',team=team(), direction='forward')
         elif request.form['submit'] == 'left':
-            motor('left')
+            game.motor('left')
             return render_template('index.html',team=team(), direction='left')
         elif request.form['submit'] == 'right':
-            motor('right')
+            game.motor('right')
             return render_template('index.html',team=team(), direction='right')
         elif request.form['submit'] == 'backward':
-            motor('backward')
+            game.motor('backward')
             return render_template('index.html',team=team(), direction='backward')
         else:
             return render_template('index.html',team=team(), direction='none')
