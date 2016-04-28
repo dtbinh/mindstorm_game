@@ -22,7 +22,7 @@ from flask import render_template, request, url_for
 from random import randint
 # This is a local file (game.py) and will probely change name in the near
 # future
-import game
+#import game
 
 def team():
     # Replace this function with something that is more permenant
