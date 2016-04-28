@@ -31,26 +31,28 @@ def team():
     return(teams[n])
 
 app = Flask(__name__)
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    return render_template('index.html')
+@app.route('/game', methods=['GET', 'POST'])
+def game():
     if request.method == 'POST':
         # Add functions before returning to run commands
         if request.form['submit'] == 'forward':
             game.motor('forward')
-            return render_template('index.html',team=team(), direction='forward')
+            return render_template('game.html',team=team(), direction='forward')
         elif request.form['submit'] == 'left':
             game.motor('left')
-            return render_template('index.html',team=team(), direction='left')
+            return render_template('game.html',team=team(), direction='left')
         elif request.form['submit'] == 'right':
             game.motor('right')
-            return render_template('index.html',team=team(), direction='right')
+            return render_template('game.html',team=team(), direction='right')
         elif request.form['submit'] == 'backward':
             game.motor('backward')
-            return render_template('index.html',team=team(), direction='backward')
+            return render_template('game.html',team=team(), direction='backward')
         else:
-            return render_template('index.html',team=team(), direction='none')
+            return render_template('game.html',team=team(), direction='none')
     else:
-        return render_template('index.html',team=team(), direction='none')
+        return render_template('game.html',team=team(), direction='none')
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

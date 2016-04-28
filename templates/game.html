@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mindstorm game</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='game.css') }}"/>
+</head>
+<body>
+  <div class="info">
+   <p>You are on team {{ team }}</p><br>
+   <p> You moved {{ direction }}</p>
+  </div>
+  <div class="buttons">
+    <div class="forward">
+      <form action="?forward" method="post" name="forward">
+        <input type="submit" name="submit" value="forward" class="forward"/>
+      </form>
+    </div>
+    <div class="left">
+      <form action="?left" method="post" name="left">
+        <input type="submit" name="submit" value="left" class="left">
+      </form>
+    </div>
+    <div class="right">
+      <form action="?right" method="post" name="right">
+        <input type="submit" name="submit" value="right" class="right">
+      </form>
+    </div><br></br>
+    <div class="backward">
+      <form action="?backward" method="post" name="backward">
+        <input type="submit" name="submit" value="backward" class="backward">
+      </form>
+    </div>
+  </div>
+</body>
+</html>
