@@ -80,4 +80,4 @@ def game():
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
 
-db_file.close()
+#db_file.close()
