@@ -20,7 +20,8 @@ Maybe some kind of controll gui like qt or tkinter for host?
 from flask import Flask
 from flask import render_template, request, url_for, make_response
 from random import randint
-#import controller
+import controller
+
 class player(object):
     def __init__(self, ip, team):
         self.ip = ip
@@ -36,20 +37,10 @@ def check_active(ip_adr):
     if not players == []:
         for i in players:
             if i.ip == ip_adr:
-                print('Is active')
-                print(i.ip)
-                print(ip_adr)
-                print(" ")
                 return False
         else:
-            print('Is not active')
-            print(ip_adr)
-            print(" ")
             return True
     else:
-        print('Is empty')
-        print(ip_adr)
-        print(" ")
         return True
 
 def team():
