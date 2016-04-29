@@ -1,25 +1,31 @@
 # mindstorm_game
-Mindstorm game using ev3dev and python2
+A game for our Mindstorms robot that we made in class, using ev3dev and Python.
 
-## Dependecies:
-Python 2 or 3 (We had problems with 3 so we switched to 2, but you can try)  
-Flask  
-ev3dev python  
-An Lego Mindstorms ev3 with ev3dev  
+## Dependencies:
+Python (2 or 3, we had problems with 3 so we switched to 2, but go ahead and try 3 if you want)  
+Flask
+ev3dev's Python bindings  
+A Lego Mindstorms ev3 running ev3dev  
 
-## Setup/Robot
-The robot has two tracks with one motor for each track and a color sensor directed down
-in the middle.
-Left motor in outA and Right motor in OutB, sensor in In1
+## Setup
+The robot has two caterpillar tracks with one motor for each, and a color sensor situated in
+the middle, facing down.
+The left motor is plugged into port A, the right one is on port B and the color sensor is on
+port 1.
 
-Right now the robot will be run from a computer hosting the webserver(flask_server.py)
-and sending command over ssh to the robot which will be connected via bluetooth to be able to
-run the motors and the color sensor.
+The web server (flask_server.py) will be run on one of our computers, recieving commands
+and sending them over to the robot over SSH, possibly Telnet, via a Bluetooth connection.
+We originally planned to have the robot itself run the web server and act as a Wifi access
+point to make others able to connect to it, but that proved to be impossible due to technical
+limitations, namely lack of working memory and increased power consumption.
 
-You can run the game from the robot, but it only has like 64mb RAM, so it's not ideal
+Other computers will then connect to the web server and control the robot via a simple web
+interface. Players will be divided into four teams, each with their own color and base. The
+objective of the game is to get the robot to your base, while the other players try to drive
+it to theirs. A real life version of Twitch Plays Pokémon, of sorts.
 
 ## TODO:
 1. Fix the color sensor, it's not working at all.
-2. Redirection for the the lobby on the website.
+2. Redirection for the lobby on the website.
 3. Motor controlling for multiple people
 4. CSS for lobby/index.html
