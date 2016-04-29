@@ -10,8 +10,7 @@ ev3dev python
 
 An Lego Mindstorms ev3 with ev3dev
 
-
-
+## Setup/Robot
 The robot has two tracks with one motor for each track and a color sensor directed down
 in the middle.
 Left motor in outA and Right motor in OutB, sensor in In1
@@ -23,7 +22,7 @@ run the motors and the color sensor.
 You can run the game from the robot, but it only has like 64mb RAM, so it's not ideal
 
 ## TODO:
-..*Fix the color sensor, it's not working at all.
-..*Redirection for the the lobby on the website.
-..*Motor controlling for multiple people
-..*CSS for lobby/index.html
+1.Fix the color sensor, it's not working at all.
+2.Redirection for the the lobby on the website.
+3.Motor controlling for multiple people
+4.CSS for lobby/index.html
