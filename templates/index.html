@@ -6,7 +6,15 @@
 </head>
 <body>
   <h1>waiting</h1>
-  <p>You're on team {{ team }}
+  <p>You're on team {{ team }}</p>
+  <p>info:</p><br>
+  <ul>
+  {% for player in info %}
+    <li>{{ player.ip }}, {{ player.team }}</li>
+  {% else %}
+    <li>Somethings wrong, should be info here :(</li>
+  {% endfor %}
+  </ul>
   <a href="/game">controll</a>
 </body>
 </html>
