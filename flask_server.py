@@ -76,7 +76,7 @@ def game():
         else:
             return render_template('game.html',team=team_var, direction='none')
     else:
-        return render_template('game.html',team=team_var, direction='none')
+        return render_template('game.html',team=team_var, direction='nowhere')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
