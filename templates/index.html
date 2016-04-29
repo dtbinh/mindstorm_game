@@ -5,16 +5,16 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='lobby.css') }}"/>
 </head>
 <body>
-  <h1>waiting</h1>
-  <p>You're on team {{ team }}</p>
+  <h1>Lobby</h1>
+  <h2>You're on team {{ team }}</h2>
+  <a href="/game">To Controller</a>
   <p>info:</p><br>
   <ul>
   {% for player in info %}
-    <li>{{ player.ip }}, {{ player.team }}</li>
+    <li>{{ player.ip }} {{ player.team }}</li>
   {% else %}
     <li>Somethings wrong, should be info here :(</li>
   {% endfor %}
   </ul>
-  <a href="/game">controll</a>
 </body>
 </html>

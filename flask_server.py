@@ -2,25 +2,21 @@
 This is the file/script for the webserver which I (Hackslashloot) am in charge
 to make, it will be run using flask and Jinja (i think)
 
-Do you really need to have more info than which button is pressed?
-
 TODO:
-Use http POST to transfer id and commands?
 
 Template:
-Other stuff
+CSS
 
 Flask:
-Unique IDs for everyone
 
 Other:
 Team set up
-Maybe some kind of controll gui like qt or tkinter for host?
 """
 from flask import Flask
 from flask import render_template, request, url_for, make_response
 from random import randint
 #import controller
+
 class player(object):
     def __init__(self, ip, team):
         self.ip = ip
