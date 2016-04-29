@@ -27,29 +27,13 @@ class player(object):
         self.team = team
 
 def check_active(ip_adr):
-    print(" ")
-    for i in players:
-        print(i.ip)
-
-    print(" ")
-
     if not players == []:
         for i in players:
             if i.ip == ip_adr:
-                print('Is active')
-                print(i.ip)
-                print(ip_adr)
-                print(" ")
                 return False
         else:
-            print('Is not active')
-            print(ip_adr)
-            print(" ")
             return True
     else:
-        print('Is empty')
-        print(ip_adr)
-        print(" ")
         return True
 
 def team():
