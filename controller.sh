@@ -10,6 +10,7 @@ echo 1000 > $MotorA/time_sp
 echo 1000 > $MotorB/time_sp
 
 command="$1"
+
 if [[ "$command" == "forward" ]] ; then
   echo 50 > $MotorA/duty_cycle_sp
   echo 50 > $MotorB/duty_cycle_sp
