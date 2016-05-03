@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-MotorA="/sys/class/tacho-motor/motor0"
-MotorB="/sys/class/tacho-motor/motor1"
+MotorA="/sys/class/tacho-motor/motor1"
+MotorB="/sys/class/tacho-motor/motor2"
 echo reset > $MotorA/command > $MotorB/command
 echo coast > $MotorA/stop_action > $MotorB/stop_action
 echo 2000 > $MotorA/time_sp > $MotorB/time_sp
