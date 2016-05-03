@@ -6,7 +6,7 @@ echo reset > $MotorA/command > $MotorB/command
 echo coast > $MotorA/stop_action > $MotorB/stop_action
 echo 2000 > $MotorA/time_sp > $MotorB/time_sp
 
-trap "read -s" SIGINT
+#trap "read -s" SIGINT
 
 while true ; do
   read -n 1 -s command
