@@ -6,10 +6,12 @@ echo reset > $MotorA/command > $MotorB/command
 echo coast > $MotorA/stop_command > $MotorB/stop_command
 echo 2000 > $MotorA/time_sp > $MotorB/time_sp
 
-trap "read -s" SIGINT
+echo "PID: $$"
+
+trap "read" SIGINT
 
 while true ; do
-  read -n 1 -s command
+  read -n 1 command
   if [[ "$command" == "f" ]] ; then
     echo 50 > $MotorA/speed_sp > $MotorB/speed_sp
     echo run-timed > $MotorA/command > $MotorB/command
