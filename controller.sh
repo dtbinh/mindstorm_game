@@ -13,18 +13,18 @@ trap "read" SIGINT
 while true ; do
   read -n 1 command
   if [[ "$command" == "f" ]] ; then
-    echo 50 > $MotorA/speed_sp > $MotorB/speed_sp
+    echo 50 > $MotorA/duty_cycle_sp > $MotorB/duty_cycle_sp
     echo run-timed > $MotorA/command > $MotorB/command
   elif [[ "$command" == "b" ]] ; then
-    echo -50 > $MotorA/speed_sp > $MotorB/speed_sp
+    echo -50 > $MotorA/duty_cycle_sp > $MotorB/duty_cycle_sp
     echo run-timed > $MotorA/command > $MotorB/command
   elif [[ "$command" == "l" ]] ; then
-    echo 50 > $MotorA/speed_sp
-    echo -50 > $MotorB/speed_sp
+    echo 50 > $MotorA/duty_cycle_sp
+    echo -50 > $MotorB/duty_cycle_sp
     echo run-timed > $MotorA/command > $MotorB/command
   elif [[ "$command" == "r" ]] ; then
-    echo -50 > $MotorA/speed_sp
-    echo 50 > $MotorB/speed_sp
+    echo -50 > $MotorA/duty_cycle_sp
+    echo 50 > $MotorB/duty_cycle_sp
     echo run-timed > $MotorA/command > $MotorB/command
   fi
 done
