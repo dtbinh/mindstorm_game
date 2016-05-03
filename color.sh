@@ -12,4 +12,5 @@ while true ; do
       read -s
     fi
   done
+  sleep .5
 done
