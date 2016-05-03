@@ -9,7 +9,7 @@ while true ; do
     if [ "$color" = "$value" ] ; then
       beep -f 261.63 -l 100 -n -f 392 -l 400
       echo "team $color won!"
-      read -s
+      read
     fi
   done
   sleep .5
