@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 
 Sensor1="/sys/class/lego-sensor/sensor0"
 echo COL-COLOR > $Sensor1/mode
