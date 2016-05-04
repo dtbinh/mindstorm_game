@@ -13,7 +13,7 @@ Other:
 Team set up
 """
 from flask import Flask
-from flask import render_template, request, url_for, make_response
+from flask import render_template, request, url_for, make_response, redirect
 from random import randint
 import controller
 
@@ -48,6 +48,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    print("Running Index")
     address = request.remote_addr
     if check_active(address):
         print('Adding')
@@ -57,26 +58,43 @@ def index():
 
 @app.route('/game', methods=['GET', 'POST'])
 def game():
+    redirect_var = True
+    for i in players:
+        print(i.ip)
+        print(request.remote_addr)
+        if request.remote_addr == i.ip:
+            print("OK")
+            redirect_var = False
+    if redirect_var:
+        return redirect(url_for('index'))
+
     team_var = get_team(request.remote_addr)
+    direction_var = None
+    free = True
     if request.method == 'POST':
         # Add functions before returning to run commands
-        if request.form['submit'] == 'forward':
+        if request.form['submit'] == 'forward' and free:
             # controller.motor is a function which runs the motors for 2 sec
+            free = False
+            direction_var = 'forward'
             controller.motor('forward')
-            return render_template('game.html',team=team_var, direction='forward')
-        elif request.form['submit'] == 'left':
+            free = True
+        elif request.form['submit'] == 'left' and free:
+            free = False
+            direction_var = 'left'
             controller.motor('left')
-            return render_template('game.html',team=team_var, direction='left')
-        elif request.form['submit'] == 'right':
+            free = True
+        elif request.form['submit'] == 'right' and free:
+            free = False
+            direction_var = 'right'
             controller.motor('right')
-            return render_template('game.html',team=team_var, direction='right')
-        elif request.form['submit'] == 'backward':
+            free = True
+        elif request.form['submit'] == 'backward' and free:
+            free = False
+            direction_var = 'backward'
             controller.motor('backward')
-            return render_template('game.html',team=team_var, direction='backward')
-        else:
-            return render_template('game.html',team=team_var, direction='none')
-    else:
-        return render_template('game.html',team=team_var, direction='nowhere')
+            free = True
+    return render_template('game.html',team=team_var, direction=direction_var)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
