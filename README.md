@@ -4,6 +4,7 @@ A game for our Mindstorms robot that we made in class, using ev3dev and Python.
 ## Dependencies:
 Python (2 or 3, we had problems with 3 so we switched to 2, but go ahead and try 3 if you want)  
 Flask  
+Paramiko  
 ev3dev's Python bindings  
 A Lego Mindstorms ev3 running ev3dev  
 

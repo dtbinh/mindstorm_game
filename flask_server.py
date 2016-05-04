@@ -15,7 +15,7 @@ Team set up
 from flask import Flask
 from flask import render_template, request, url_for, make_response
 from random import randint
-#import controller
+import controller
 
 class player(object):
     def __init__(self, ip, team):
