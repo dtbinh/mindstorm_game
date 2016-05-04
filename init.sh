@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-export MotorA="/sys/class/tacho-motor/motor1"
-export MotorB="/sys/class/tacho-motor/motor2"
+export MotorA="/sys/class/tacho-motor/motor0"
+export MotorB="/sys/class/tacho-motor/motor1"
 echo reset > $MotorA/command
 echo reset > $MotorB/command
 echo coast > $MotorA/stop_command
