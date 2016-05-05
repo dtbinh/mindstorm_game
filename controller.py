@@ -10,18 +10,41 @@ ssh_color.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh_move.connect('ev3dev.local', username='root',password='destroyer')
 ssh_color.connect('ev3dev.local', username='root',password='destroyer')
 
-ssh_color.exec_command('./mindstorm_game/color.sh')
-
 # This is to be able to run one command at a time
 # else it will do a new command every time
 free = True
 
+def kill():
+    ssh_move.exec_command('killall bash')
+    quit()
+
+Sensor1="/sys/class/lego-sensor/sensor0"
+ssh_color.exec_command('echo COL-COLOR > {}/mode'.format(Sensor1))
+
+def team_win(color):
+    if color == b'2':
+        print("Blue")
+        kill()
+    elif color == b'3':
+        print("Green")
+        kill()
+    elif color == b'4':
+        print("Yellow")
+        kill()
+    elif color == b'5':
+        print("Red")
+        kill()
+    else:
+        print("Not right")
+        print(color)
+
+def color():
+    stdin, stdout, stderr = ssh_color.exec_command('cat {}/value0'.format(Sensor1))
+    color = stdout._read(1)
+    print(color)
+    if color in ['2', '3', '4', '5']:
+        team_win(color)
+
 def motor(direction):
-    if False:
-        # The command is a local script that takes startup args
-        # We set the variable free to false to make sure that
-        # nothing else runs
-        #free = False
-        ssh_move.exec_command('./mindstorm_game/controller.sh {}'.format(direction))
-        #free = True
     ssh_move.exec_command('./mindstorm_game/controller.sh {}'.format(direction))
+    color()

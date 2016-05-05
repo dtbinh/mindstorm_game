@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block body %}
+<p>Info:</p><br>
+<ul>
+{% for player in info %}
+  <li>{{ player.ip }} {{ player.team }}</li>
+{% else %}
+  <li>Somethings wrong, should be info here :(</li>
+{% endfor %}
+</ul>
+<form action="?kill" method="post" name="kill">
+  <input type="submit" name="submit" value="kill" class="kill"/>
+</form>
+{% endblock %}

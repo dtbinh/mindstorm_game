@@ -54,21 +54,27 @@ def index():
         print('Adding')
         players.append(player(address, team()))
     team_var = get_team(address)
-    return render_template('index.html', info=players, team=team_var)
+    return render_template('index.html', team=team_var)
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if request.method == 'POST':
+        if request.form['submit'] == 'kill':
+            controller.kill()
+    return render_template('admin.html', info=players)
 
 @app.route('/game', methods=['GET', 'POST'])
 def game():
+    player_ip = request.remote_addr
     redirect_var = True
     for i in players:
-        print(i.ip)
-        print(request.remote_addr)
-        if request.remote_addr == i.ip:
+        if player_ip == i.ip:
             print("OK")
             redirect_var = False
     if redirect_var:
         return redirect(url_for('index'))
 
-    team_var = get_team(request.remote_addr)
+    team_var = get_team(player_ip)
     direction_var = None
     free = True
     if request.method == 'POST':
