@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+if [[ -f /root/someone_has_won ]] ; then ; exit ; fi 
+
 MotorA="/sys/class/tacho-motor/motor0"
 MotorB="/sys/class/tacho-motor/motor1"
 echo reset > $MotorA/command
