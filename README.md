@@ -25,7 +25,6 @@ objective of the game is to get the robot to your base, while the other players 
 it to theirs. A real life version of Twitch Plays Pokémon, of sorts.
 
 ## TODO:
-1. Fix the color sensor, it's not working at all.
+1. Make the server/robot not crash with multiple people controlling it.
 2. Redirection for the lobby on the website.
 3. Motor controlling for multiple people
-4. CSS for lobby/index.html
