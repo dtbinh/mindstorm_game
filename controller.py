@@ -15,6 +15,7 @@ ssh_color.connect('ev3dev.local', username='root',password='destroyer')
 free = True
 
 def kill():
+    ssh_color.exec_command("beep -f 415.3 -l 300 -n -f 466.16 -l 200 -n -f 369.99 -l 300 -n -f 415.3 -l 800 -n -f 493.88 -l 300 -n -f 466.16 -l 200 -n -f 369.99 -l 300 -n -f 415.3 -l 800")
     ssh_move.exec_command('killall bash')
     quit()
 
@@ -28,7 +29,7 @@ def team_win(color):
     elif color == b'3':
         print("Green")
         kill()
-    elif color == b'4':
+    elif color == b'4' and False:
         print("Yellow")
         kill()
     elif color == b'5':
@@ -42,9 +43,10 @@ def color():
     stdin, stdout, stderr = ssh_color.exec_command('cat {}/value0'.format(Sensor1))
     color = stdout._read(1)
     print(color)
-    if color in ['2', '3', '4', '5']:
+    if color in [b'2', b'3', b'4', b'5']:
         team_win(color)
 
 def motor(direction):
+    color()
     ssh_move.exec_command('./mindstorm_game/controller.sh {}'.format(direction))
     color()
