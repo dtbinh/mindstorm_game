@@ -46,5 +46,11 @@ def color():
         team_win(color)
 
 def motor(direction):
-    ssh_move.exec_command('./mindstorm_game/controller.sh {}'.format(direction))
-    color()
+    motor_active = False
+    global motor_active
+    color
+    if not motor_active:
+        motor_active = True
+        ssh_move.exec_command('./mindstorm_game/controller.sh {}'.format(direction))
+        color()
+        motor_active = False
