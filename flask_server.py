@@ -17,11 +17,14 @@ from queue import Queue
 import controller, threading, time
 
 class player(object):
+	# Small class to carry information to webpage
 	def __init__(self, ip, team):
 		self.ip = ip
 		self.team = team
 
 def check_active(ip_adr):
+	# ip_adr is the ip adress of user
+	# It returns False if the users ip is already in the list
 	if not players == []:
 		for i in players:
 			if i.ip == ip_adr:
@@ -32,24 +35,43 @@ def check_active(ip_adr):
 		return True
 
 def team():
+	# This is to give a team, it would be nice to make this
+	# assign so it would be even
 	teams = ['blue', 'red', 'green', 'yellow']
 	n = randint(0,3)
 	return(teams[n])
 
 def get_team(ip):
+	# k
 	for i in players:
 		if ip == i.ip:
 			return i.team
 lock = threading.Lock()
 def robot_movement(direction):
+	start = time.perf_counter()
+	motor_active = False
 	if True:
 	# Add functions before returning to run commands
-		if direction == 'forward':
+		if direction == 'forward' and not motor_active:
 			# controller.motor is a function which runs the motors for 2 sec
-			controller.motor('forward')
-		elif direction == 'left':
-			controller.motor('left')
+			motor_active = True
+			controller.motor(b'forward')
+			motor_active = False
+		elif direction == 'left'and not motor_active:
+			motor_active = True
+			controller.motor(b'left')
+			motor_active = False
+		elif direction == 'right' and not motor_active:
+			motor_active = True
+			controller.motor(b'right')
+			motor_active = False
+		elif direction == 'backward' and not motor_active:
+			motor_active = True
+			controller.motor(b'backward')
+			motor_active = False
+		time.sleep(1)
 		with lock:
+			print(time.perf_counter() - start)
 			print(threading.current_thread().name, direction)
 
 def worker():
@@ -59,7 +81,8 @@ def worker():
 		q.task_done()
 
 q = Queue()
-for i in range(4):
+
+for i in range(16):
 	t = threading.Thread(target=worker)
 	t.daemon = True
 	t.start()
@@ -86,6 +109,7 @@ def admin():
 
 @app.route('/game', methods=['GET', 'POST'])
 def game():
+	time_full = time.perf_counter()
 	player_ip = request.remote_addr
 	redirect_var = True
 	for i in players:
@@ -94,13 +118,11 @@ def game():
 			redirect_var = False
 	if redirect_var:
 		return redirect(url_for('index'))
-
 	team_var = get_team(player_ip)
 	direction_var = None
-	start = time.perf_counter()
 	if request.method == 'POST':
 		q.put(request.form['submit'])
-	print('time:',time.perf_counter()-start)
+	print(time.perf_counter() - time_full)
 	return render_template('game.html',team=team_var, direction=direction_var)
 
 if __name__ == '__main__':
