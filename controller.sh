@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-if [[ -f /root/.moving ]] ; then ; exit ; fi
+if [[ -f /root/.moving ]] ; then
+  exit
+fi
 
 MotorA="/sys/class/tacho-motor/motor0"
 MotorB="/sys/class/tacho-motor/motor1"
