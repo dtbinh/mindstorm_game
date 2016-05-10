@@ -2,6 +2,7 @@
 Functions for controlling the robot over ssh and bash
 """
 import paramiko
+from time import sleep
 
 ssh_move = paramiko.SSHClient()
 ssh_color = paramiko.SSHClient()
@@ -47,11 +48,12 @@ def color():
         team_win(color)
 
 def motor(direction):
-    motor_active = False
-    global motor_active
-    color
-    if not motor_active:
-        motor_active = True
-        ssh_move.exec_command('./mindstorm_game/controller.sh {}'.format(direction))
-        color()
-        motor_active = False
+	global motor_active
+	motor_active = False
+	color()
+	print(motor_active)
+	if not motor_active:
+		motor_active = True
+		ssh_move.exec_command('./mindstorm_game/controller.sh {}'.format(direction))	
+		color()
+		motor_active = False
