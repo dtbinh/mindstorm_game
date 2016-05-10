@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-if [[ -f /root/.moving ]] ; then ; exit ; fi
+if [[ -f /root/.moving ]] ; then
+  exit
+fi
 
 MotorA="/sys/class/tacho-motor/motor0"
 MotorB="/sys/class/tacho-motor/motor1"
@@ -31,16 +33,16 @@ elif [[ "$command" == "backward" ]] ; then
   rm /root/.moving
 elif [[ "$command" == "left" ]] ; then
   touch /root/.moving
-  echo 50 > $MotorA/duty_cycle_sp
-  echo -50 > $MotorB/duty_cycle_sp
+  echo 30 > $MotorA/duty_cycle_sp
+  echo -30 > $MotorB/duty_cycle_sp
   echo run-timed > $MotorA/command
   echo run-timed > $MotorB/command
   sleep 1
   rm /root/.moving
 elif [[ "$command" == "right" ]] ; then
   touch /root/.moving
-  echo -50 > $MotorA/duty_cycle_sp
-  echo 50 > $MotorB/duty_cycle_sp
+  echo -30 > $MotorA/duty_cycle_sp
+  echo 30 > $MotorB/duty_cycle_sp
   echo run-timed > $MotorA/command
   echo run-timed > $MotorB/command
   sleep 1
