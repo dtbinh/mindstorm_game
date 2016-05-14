@@ -33,7 +33,6 @@ def check_active(ip_adr):
 			return True
 	else:
 		return True
-
 def team():
 	# This is to give a team, it would be nice to make this
 	# assign so it would be even
@@ -66,14 +65,14 @@ def robot_movement(direction):
 			motor_active = True
 			controller.motor(b'right')
 			motor_active = False
-		elif direction == 'backward' and not motor_active:
-			motor_active = True
-			controller.motor(b'backward')
-			motor_active = False
+                elif direction == 'backward' and not motor_active:
+                        motor_active = True
+                        controller.motor(b'backward')
+                        motor_active = False
 		# Multithreading
                 with lock:
-			print(time.perf_counter() - start)
-			print(threading.current_thread().name, direction)
+                        print(time.perf_counter() - start)
+                        print(threading.current_thread().name, direction)
 
 def worker():
         # Multithreading
