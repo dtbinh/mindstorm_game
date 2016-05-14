@@ -5,6 +5,7 @@ A game for our Mindstorms robot that we made in class, using ev3dev and Python.
 Python (2 or 3, we had problems with 3 so we switched to 2, but go ahead and try 3 if you want)
 Flask
 Paramiko
+Telnet on the robot
 ev3dev's Python bindings
 A Lego Mindstorms ev3 running ev3dev
 
@@ -14,8 +15,10 @@ the middle, facing down.
 The left motor is plugged into port A, the right one is on port B and the color sensor is on
 port 1.
 
+We have added telnet because it's faster then SSH. You need to setup telnet manually
+
 The web server (flask_server.py) will be run on one of our computers, recieving commands
-and sending them over to the robot over SSH, via Bluetooth tethering. We originally planned to have the robot itself run the
+and sending them over to the robot over SSH and telnet, via Bluetooth tethering. We originally planned to have the robot itself run the
 web server and act as a Wifi access point to make others able to connect to it, but that proved to be impossible due
 to technical limitations, namely lack of working memory and increased power consumption.
 
@@ -26,5 +29,4 @@ it to theirs. A real life version of Twitch Plays Pokémon, of sorts.
 
 ## TODO:
 1. Make the server/robot not crash with multiple people controlling it.
-2. Redirection for the lobby on the website.
-3. Motor controlling for multiple people
+2. Motor controlling for multiple people
