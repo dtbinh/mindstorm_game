@@ -1,28 +1,50 @@
 #!/usr/bin/env bash
 
+if [[ -f /root/.moving ]] ; then
+  exit
+fi
+
 MotorA="/sys/class/tacho-motor/motor0"
 MotorB="/sys/class/tacho-motor/motor1"
-echo reset > $MotorA/command > $MotorB/command
-echo coast > $MotorA/stop_action > $MotorB/stop_action
-echo 2000 > $MotorA/time_sp > $MotorB/time_sp
+echo reset > $MotorA/command
+echo reset > $MotorB/command
+echo coast > $MotorA/stop_command
+echo coast > $MotorB/stop_command
+echo 1000 > $MotorA/time_sp
+echo 1000 > $MotorB/time_sp
 
-trap "read -s" SIGINT
+command="$1"
 
-while true ; do
-  read -n 1 -s command
-  if [[ "$command" == "f" ]] ; then
-    echo 50 > $MotorA/speed_sp > $MotorB/speed_sp
-    echo run-timed > $MotorA/command > $MotorB/command
-  elif [[ "$command" == "b" ]] ; then
-    echo -50 > $MotorA/speed_sp > $MotorB/speed_sp
-    echo run-timed > $MotorA/command > $MotorB/command
-  elif [[ "$command" == "l" ]] ; then
-    echo 50 > $MotorA/speed_sp
-    echo -50 > $MotorB/speed_sp
-    echo run-timed > $MotorA/command > $MotorB/command
-  elif [[ "$command" == "r" ]] ; then
-    echo -50 > $MotorA/speed_sp
-    echo 50 > $MotorB/speed_sp
-    echo run-timed > $MotorA/command > $MotorB/command
-  fi
-done
+if [[ "$command" == "forward" ]] ; then
+  touch /root/.moving
+  echo 50 > $MotorA/duty_cycle_sp
+  echo 50 > $MotorB/duty_cycle_sp
+  echo run-timed > $MotorA/command
+  echo run-timed > $MotorB/command
+  sleep 1
+  rm /root/.moving
+elif [[ "$command" == "backward" ]] ; then
+  touch /root/.moving
+  echo -50 > $MotorA/duty_cycle_sp
+  echo -50 > $MotorB/duty_cycle_sp
+  echo run-timed > $MotorA/command
+  echo run-timed > $MotorB/command
+  sleep 1
+  rm /root/.moving
+elif [[ "$command" == "left" ]] ; then
+  touch /root/.moving
+  echo 30 > $MotorA/duty_cycle_sp
+  echo -30 > $MotorB/duty_cycle_sp
+  echo run-timed > $MotorA/command
+  echo run-timed > $MotorB/command
+  sleep 1
+  rm /root/.moving
+elif [[ "$command" == "right" ]] ; then
+  touch /root/.moving
+  echo -30 > $MotorA/duty_cycle_sp
+  echo 30 > $MotorB/duty_cycle_sp
+  echo run-timed > $MotorA/command
+  echo run-timed > $MotorB/command
+  sleep 1
+  rm /root/.moving
+fi

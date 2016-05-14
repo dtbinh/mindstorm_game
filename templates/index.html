@@ -1,20 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Mindstorm game</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='lobby.css') }}"/>
-</head>
-<body>
-  <h1>waiting</h1>
-  <p>You're on team {{ team }}</p>
-  <p>info:</p><br>
-  <ul>
-  {% for player in info %}
-    <li>{{ player.ip }}, {{ player.team }}</li>
-  {% else %}
-    <li>Somethings wrong, should be info here :(</li>
-  {% endfor %}
-  </ul>
-  <a href="/game">controll</a>
-</body>
-</html>
+<title>Mindstorm game</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='lobby.css') }}">
+<h1>Lobby</h1>
+<h2>You're on team {{ team }}</h2>
+<a href="/game">To controller</a>
+{% block body %}{% endblock %}

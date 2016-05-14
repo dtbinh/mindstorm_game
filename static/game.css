@@ -1,8 +1,10 @@
 .info {
+  font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
 
 .forward {
+  font-family: Arial, Helvetica, sans-serif;
   border-style: hidden;
   border-width: medium;
   width: 60%;
@@ -13,6 +15,7 @@
 }
 
 .left {
+  font-family: Arial, Helvetica, sans-serif;
   border-style: hidden;
   border-width: medium;
   position: absolute;
@@ -24,6 +27,7 @@
 }
 
 .right {
+  font-family: Arial, Helvetica, sans-serif;
   border-style: hidden;
   border-width: medium;
   position: absolute;
@@ -35,6 +39,7 @@
 }
 
 .backward {
+  font-family: Arial, Helvetica, sans-serif;
   border-style: hidden;
   border-width: medium;
   width: 60%;

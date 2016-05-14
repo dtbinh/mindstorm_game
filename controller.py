@@ -1,55 +1,73 @@
-#import the ev3dev library
-import ev3dev.ev3 as ev3
+"""
+Functions for controlling the robot over ssh and bash
+"""
+from time import sleep
+import telnetlib, paramiko
 
-#define sensor and motor variables
-motorA = ev3.LargeMotor('outA')
-motorB = ev3.LargeMotor('outB')
+# With telnet we need to make all strings in byte
 
-colorSensor = ev3.ColorSensor('in1')
+# We needed a quickfix so to read output so we returned to ssh for color
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect('ev3dev.local', username='root',password='destroyer')
 
-#define a function that makes it possible for the robot to announce the winner
-def winSpeak(winner):
-    ev3.Sound.speak(winner + 'team wins').wait()
+# This is to login to telnet
+tn = telnetlib.Telnet('ev3dev.local')
+tn.read_until(b"ev3dev login: ")
+tn.write('root'.encode('ascii') + b'\n')
+tn.read_until(b"Password: ")
+tn.write('destroyer'.encode('ascii') + b'\n')
 
-#if the color the sensor detects is either blue, green, yellow or red
-#the respective team wins
-def colorCheck(sensor):
-    if sensor in [2, 3, 4, 5]:
-        if sensor == 2:
-            print('Blue team wins!')
-            winSpeak('blue')
-        elif sensor == 3:
-            print('Green team wins!')
-            winSpeak('green')
-        elif sensor == 4:
-            print('Yellow team wins!')
-            winSpeak('yellow')
-        elif sensor == 5:
-            print('Red team wins!')
-            winSpeak('red')
-active = False
+# This is to be able to run one command at a time
+# else it will do a new command every time
+free = True
+
+tn.write(b'touch test\n')
+
+def kill():
+    # The long beep command is the John Cena theme
+    tn.write(b"beep -f 415.3 -l 300 -n -f 466.16 -l 200 -n -f 369.99 -l 300 -n -f 415.3 -l 800 -n -f 493.88 -l 300 -n -f 466.16 -l 200 -n -f 369.99 -l 300 -n -f 415.3 -l 800" + b"\n")
+Sensor1="/sys/class/lego-sensor/sensor0"
+# This is to start the sensor
+ssh.exec_command('echo COL-COLOR > {}/mode'.format(Sensor1))
+
+def team_win(color):
+    # Just checks for color
+    if color == b'2':
+        print("Blue")
+        kill()
+    elif color == b'3':
+        print("Green")
+        kill()
+    elif color == b'4':
+        print("Yellow")
+        kill()
+    elif color == b'5':
+        print("Red")
+        kill()
+    else:
+        print("Not right")
+        print(color)
+
+def color():
+        # This long command is to get output. Checks color
+	stdin, stdout, stderr = ssh.exec_command('cat {}/value0'.format(Sensor1))
+	color = stdout._read(1)
+	print(color)
+	if color in [b'2', b'3', b'4', b'5']:
+		team_win(color)
+
 def motor(direction):
-    # The not is just to lookm good
-    if not active:
-        if direction == 'right':
-            active = True
-            motorA.run_timed(time_sp=2000, duty_cycle_sp=50)
-            # colorCheck(colorSensor.color())
-            active = False
-        elif direction == 'left':
-            active = True
-            motorB.run_timed(time_sp=2000, duty_cycle_sp=50)
-            # colorCheck(colorSensor.color())
-            active = False
-        elif direction == 'forward':
-            active = True
-            motorA.run_timed(time_sp=2000, duty_cycle_sp=50)
-            motorB.run_timed(time_sp=2000, duty_cycle_sp=50)
-            # colorCheck(colorSensor.color())
-            active = False
-        elif direction == 'backward':
-            active = True
-            motorA.run_timed(time_sp=2000, duty_cycle_sp=-50) #check negative if this doesn't work
-            motorB.run_timed(time_sp=2000, duty_cycle_sp=-50)
-            # colorCheck(colorSensor.color())
-            active = False
+        # motor_active is an atemptemnt to make the game work more
+        # activly, but doesnt work
+        global motor_active
+        motor_active = False
+        color()
+        print(motor_active)
+        if not motor_active or True:
+                motor_active = True
+                print(direction)
+                # Runs the bash script on the robot via telnet to move the robot
+                tn.write(b'/root/mindstorm_game/controller.sh ' + direction + b"\n")
+                color()
+                motor_active = False
